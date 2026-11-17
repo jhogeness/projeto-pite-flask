@@ -11,4 +11,4 @@ Está nas pastas `app/` (MVC) e `tests/`, na raiz do repositório.
 5. Use os filtros "Todas", "Pendentes" e "Concluídas" para organizar a lista.
 
 ## Vídeo de demonstração (mínimo de 5 minutos, narrado)
-Link: _(cole aqui o link do YouTube não listado ou do Drive)_
+Link: _(https://drive.google.com/drive/folders/1NMehIsGWew9JrEzlhN5b5Pk4Srt9DBg2?usp=share_link)_
