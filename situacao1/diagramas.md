@@ -1,8 +1,10 @@
 # Diagramas UML
 
-Para ver no VS Code, instale a extensão "Markdown Preview Mermaid Support" e use Cmd+Shift+V.
+Este documento reúne os diagramas UML do Gerenciador de Tarefas de Estudo. Eles descrevem a estrutura de dados, as funcionalidades e o fluxo das principais operações do sistema. Os diagramas foram escritos em Mermaid e são exibidos diretamente pelo GitHub.
 
-## Diagrama de classes
+## 1. Diagrama de classes
+Representa as duas entidades do sistema, Matéria e Tarefa, com seus atributos e o relacionamento de um para muitos entre elas. Corresponde às classes de `app/models.py`.
+
 ```mermaid
 classDiagram
     class Materia {
@@ -20,7 +22,9 @@ classDiagram
     Materia "1" --> "0..*" Tarefa : possui
 ```
 
-## Diagrama de casos de uso
+## 2. Diagrama de casos de uso
+Mostra as funcionalidades disponíveis para o estudante, que é o único ator do sistema. Cada caso de uso corresponde a uma rota de `app/controllers.py`.
+
 ```mermaid
 flowchart LR
     E([Estudante])
@@ -38,7 +42,11 @@ flowchart LR
     E --> U5
 ```
 
-## Diagrama de sequência: cadastrar tarefa
+Funcionalidades não implementadas nesta versão: editar tarefa e excluir matéria.
+
+## 3. Diagrama de sequência: cadastrar tarefa
+Detalha o caminho de uma requisição de cadastro, da tela até o banco de dados. Corresponde à função `nova_tarefa` do controller, que valida título, prazo e matéria antes de gravar.
+
 ```mermaid
 sequenceDiagram
     actor E as Estudante
@@ -57,7 +65,9 @@ sequenceDiagram
     end
 ```
 
-## Diagrama de atividades: alternar status
+## 4. Diagrama de atividades: alternar status
+Mostra o fluxo de alternar uma tarefa entre pendente e concluída. Corresponde à função `concluir_tarefa` do controller.
+
 ```mermaid
 flowchart TD
     A([Início]) --> B[Abrir lista de tarefas]
