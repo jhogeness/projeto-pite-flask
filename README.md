@@ -32,7 +32,7 @@ SGBD: SQLite (arquivo `tarefas.db`, criado automaticamente ao iniciar a aplicaç
 - `concluida` (BOOLEAN, padrão falso): indica se a tarefa foi concluída.
 - `id_materia` (INTEGER, obrigatório, chave estrangeira para `materia.id`): matéria da tarefa.
 
-**Relacionamento:** uma matéria possui várias tarefas (1:N). Uma matéria com tarefas é excluída junto com elas (cascata).
+**Relacionamento:** uma matéria possui várias tarefas (1:N).
 
 ### Documentação de modelagem
 - [Dicionário de dados completo](situacao1/dicionario-de-dados.md)
