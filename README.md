@@ -1,61 +1,107 @@
-# 📚 Gerenciador de Tarefas de Estudo (PITE Software II)
+# Gerenciador de Tarefas de Estudo
 
-Aplicação web desenvolvida em **Python com Flask**, orientada à arquitetura **MVC** (Model-View-Controller), utilizando **SQLite** para persistência de dados, **Bootstrap 5** para a interface visual e **Pytest** para a suíte de testes automatizados.
+Projeto Integrador Transdisciplinar em Engenharia de Software II, de SEU NOME (Cruzeiro do Sul Virtual).
 
----
+Aplicação web em **Python com Flask**, na arquitetura **MVC** (Model-View-Controller), com **SQLite** para persistência, **Bootstrap 5** na interface e **Pytest** nos testes automatizados.
 
-## 📋 Sumário
-1. [Situação 1: Modelagem e Requisitos](#situação-1-modelagem-e-requisitos)
-2. [Situação 2: Implementação e Testes](#situação-2-implementação-e-testes)
-3. [Situação 3: Validação e Testes com Usuários](#situação-3-validação-e-testes-com-usuários)
-4. [Como Executar o Projeto](#como-executar-o-projeto)
-
----
-
-## 🛠️ Situação 1: Modelagem e Requisitos
-
-### 1.1 Visão Geral do Sistema
-O **Gerenciador de Tarefas de Estudo** é um sistema voltado para estudantes organizarem suas matérias acadêmicas, definirem prazos de entrega, acompanharem o status de conclusão e gerenciarem sua rotina de estudos de forma prática e centralizada.
-
-### 1.2 Dicionário de Dados
-O banco de dados relacional (`SQLite`) é composto por duas entidades principais:
-
-* **Tabela `materia`**
-  * `id` (INTEGER, Chave Primária): Identificador único da matéria.
-  * `nome` (VARCHAR(100), Obrigatório): Nome da disciplina ou matéria de estudo.
-
-* **Tabela `tarefa`**
-  * `id` (INTEGER, Chave Primária): Identificador único da tarefa.
-  * `titulo` (VARCHAR(150), Obrigatório): Título descritivo da tarefa ou atividade.
-  * `descricao` (TEXT, Opcional): Detalhes ou orientações sobre a tarefa.
-  * `data_conclusao` (DATE, Obrigatório): Prazo limite para entrega/conclusão.
-  * `status` (VARCHAR(30), Padrão: 'Pendente'): Estado atual (`Pendente`, `Em Andamento`, `Concluída`).
-  * `materia_id` (INTEGER, Chave Estrangeira referenciando `materia.id`): Matéria à qual a tarefa pertence.
+## Sumário
+1. [Situação 1: modelagem](#situação-1-modelagem)
+2. [Situação 2: implementação](#situação-2-implementação)
+3. [Situação 3: validação](#situação-3-validação)
+4. [Como executar](#como-executar)
 
 ---
 
-## 💻 Situação 2: Implementação e Testes
+## Situação 1: modelagem
 
-### 2.1 Tecnologias Utilizadas
-* **Linguagem:** Python 3.9+
-* **Framework Web:** Flask & Flask-SQLAlchemy
-* **Banco de Dados:** SQLite
-* **Front-end:** Bootstrap 5 (via CDN) e Jinja2 Templates
-* **Testes Automatizados:** Pytest
+### Visão geral
+O sistema ajuda estudantes a organizar tarefas por matéria, definir prazos, marcar tarefas como concluídas e filtrar a lista por situação.
 
-### 2.2 Estrutura de Pastas (MVC)
+### Dicionário de dados
+SGBD: SQLite (arquivo `tarefas.db`, criado automaticamente ao iniciar a aplicação).
+
+**Tabela `materia`**
+- `id` (INTEGER, chave primária): identificador da matéria.
+- `nome` (VARCHAR(80), obrigatório, único): nome da matéria.
+
+**Tabela `tarefa`**
+- `id` (INTEGER, chave primária): identificador da tarefa.
+- `titulo` (VARCHAR(120), obrigatório): título da tarefa.
+- `descricao` (TEXT, opcional): detalhes da tarefa.
+- `prazo` (DATE, opcional): data limite.
+- `concluida` (BOOLEAN, padrão falso): indica se a tarefa foi concluída.
+- `id_materia` (INTEGER, obrigatório, chave estrangeira para `materia.id`): matéria da tarefa.
+
+**Relacionamento:** uma matéria possui várias tarefas (1:N). Uma matéria com tarefas é excluída junto com elas (cascata).
+
+### Documentação de modelagem
+- [Dicionário de dados completo](situacao1/dicionario-de-dados.md)
+- [Diagramas UML](situacao1/diagramas.md)
+- [Telas e mensagens de erro (IHC)](situacao1/telas-e-mensagens.md)
+
+---
+
+## Situação 2: implementação
+
+### Funcionalidades
+- Cadastrar matérias (sem repetição).
+- Cadastrar tarefas com título, descrição, matéria e prazo.
+- Alternar a tarefa entre pendente e concluída.
+- Excluir tarefas, com confirmação.
+- Filtrar tarefas: todas, pendentes e concluídas.
+- Validação de dados com mensagens de erro (título vazio, prazo inválido, matéria inválida ou repetida).
+
+### Tecnologias
+- Python 3 e Flask
+- Flask-SQLAlchemy e SQLite
+- Bootstrap 5 (via CDN) e templates Jinja2
+- Pytest
+
+### Estrutura do projeto (MVC)
 ```text
-Projeto/
-├── app/
-│   ├── __init__.py         # Fábrica da aplicação e inicialização do DB
-│   ├── models.py           # Modelos de dados (Materia, Tarefa)
-│   ├── controllers.py      # Rotas e lógica de controle
-│   └── templates/          # Interfaces HTML com Bootstrap
-│       ├── base.html
-│       ├── index.html
-│       ├── form_tarefa.html
-│       └── materias.html
-├── tests/                  # Testes automatizados com Pytest
-├── run.py                  # Ponto de entrada da aplicação
-├── requirements.txt        # Dependências do projeto
-└── README.md               # Documentação oficial
+app/
+├── __init__.py       # fábrica da aplicação e criação do banco
+├── models.py         # Model: Materia e Tarefa
+├── controllers.py    # Controller: rotas e validações
+└── templates/        # View: páginas HTML
+    ├── base.html
+    ├── index.html
+    ├── form_tarefa.html
+    └── materias.html
+tests/                # testes automatizados
+situacao1/            # modelagem
+situacao2/            # manual de uso e vídeo
+situacao3/            # testes e validação
+run.py                # ponto de entrada
+requirements.txt      # dependências
+pytest.ini            # configuração do pytest
+```
+
+### Manual e vídeo
+- [Manual de uso e vídeo de demonstração](situacao2/README.md)
+
+---
+
+## Situação 3: validação
+
+- Testes automatizados (verificação): [resultado-testes.txt](situacao3/resultado-testes.txt)
+- Testes com colegas (validação), correções e vídeo: [situacao3/README.md](situacao3/README.md)
+
+---
+
+## Como executar
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
+```
+
+Acesse http://127.0.0.1:5001
+
+Para rodar os testes:
+
+```bash
+ python -m pytest -v
+```
