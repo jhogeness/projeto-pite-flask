@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0 -- /Users/jhogenes/Projeto/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/jhogenes/Projeto
+collecting ... collected 7 items
+
+tests/test_models.py::test_criar_tarefa PASSED                           [ 14%]
+tests/test_models.py::test_pagina_inicial PASSED                         [ 28%]
+tests/test_models.py::test_tarefa_sem_titulo_nao_e_gravada PASSED        [ 42%]
+tests/test_models.py::test_prazo_invalido_nao_quebra PASSED              [ 57%]
+tests/test_models.py::test_tarefa_sem_materia_nao_e_gravada PASSED       [ 71%]
+tests/test_models.py::test_materia_duplicada PASSED                      [ 85%]
+tests/test_models.py::test_alternar_status PASSED                        [100%]
+
+=============================== warnings summary ===============================
+tests/test_models.py::test_alternar_status
+  /Users/jhogenes/Projeto/.venv/lib/python3.9/site-packages/flask_sqlalchemy/query.py:30: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    rv = self.get(ident)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 7 passed, 1 warning in 0.25s =========================
